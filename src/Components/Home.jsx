@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Button from "react-bootstrap/Button";
+import { Button, Container } from "react-bootstrap";
 import Country from "./Country";
 
 const Home = () => {
@@ -9,9 +9,10 @@ const Home = () => {
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [filterActive, setFilterActive] = useState(false);
   console.log(countries);
+
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
-      .then((res) => res.json())
+      .then((response) => response.json())
       .then((data) => setCountries(data));
   }, []);
 
@@ -46,19 +47,34 @@ const Home = () => {
   const countryList = filterActive ? filteredCountries : sortedCountries;
 
   return (
-    <div>
-      <div>
-        <div className="bg-info">
-          <h1 className="text-left bg-success">Countries Information</h1>
-        </div>
+    <div style={{ backgroundColor: "#DFFFE3" }}>
+      <div className="p-4">
+        <h1 className="text-left pb-2">Countries Information</h1>
+
         <div className="d-flex justify-content-between">
           <div className="d-flex justify-content-start gap-3">
-            <Button onClick={() => handleSort("ascending")}>Ascending</Button>
-            <Button onClick={() => handleSort("descending")}>Descending</Button>
+            <Button
+              className="border border-0 mb-3"
+              style={{ backgroundColor: "#5AEF6D" }}
+              onClick={() => handleSort("ascending")}
+            >
+              Ascending
+            </Button>
+            <Button
+              className="border border-0 mb-3"
+              style={{ backgroundColor: "#5AEF6D" }}
+              onClick={() => handleSort("descending")}
+            >
+              Descending
+            </Button>
           </div>
           <div>
-            <Button onClick={handleFilter}>
-              {filterActive ? "Clear Filter" : "Apply Filter"}
+            <Button
+              className="border border-0 mb-3"
+              style={{ backgroundColor: "#5AEF6D" }}
+              onClick={handleFilter}
+            >
+              {filterActive ? "Clear Filter" : "Filter"}
             </Button>
           </div>
         </div>
